@@ -1,59 +1,96 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# 👟 AppLaravel: Sistema Integral de Gestión para Zapaterías
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+AppLaravel es una solución completa diseñada para el sector retail (calzado y afines), con un enfoque en la escalabilidad multi-sede y el control granular de inventarios y ventas.
 
-## About Laravel
+---
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+## 🌟 Módulos y Funcionalidades Principales
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+### 1. 🏬 Arquitectura Multi-Sede (Aislamiento Total)
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+Diseñado para negocios que operan en múltiples ubicaciones geográficas.
 
-## Learning Laravel
+- **Aislamiento por Tienda**: Cada sede tiene su propio ecosistema de datos. Un producto creado en la "Tienda A" no es visible en la "Tienda B" a menos que se configure explícitamente.
+- **Cambio de Contexto Dinámico**: Los administradores disponen de un selector de sede en el dashboard. Al cambiar de sede, el sistema utiliza re-autenticación de seguridad para asegurar que el usuario mantenga permisos válidos en el nuevo contexto.
+- **Identidad Visual**: Cada sede puede tener su propio color primario y branding configurado en la base de datos.
+- **Seguridad de Roles**:
+    - **Admin**: Acceso total, capacidad de saltar entre sedes y gestionar usuarios.
+    - **Cajero**: Bloqueado a una única sede asignada. No puede ver datos de otras tiendas.
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework. You can also check out [Laravel Learn](https://laravel.com/learn), where you will be guided through building a modern Laravel application.
+### 2. 📦 Inventario y Gestión de Productos
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+Más allá de un simple registro de productos, el sistema maneja variantes complejas.
 
-## Laravel Sponsors
+- **Categorías Inteligentes**: Los productos se organizan por categorías (Zapatillas, Sandalias, etc.).
+- **Tallas y Presentaciones**: El sistema permite definir números de calzado (tallas). Estas se filtran por categoría para que, al ingresar stock de "Zapatillas", solo se muestren tallas relevantes.
+- **Ingreso de Stock**: Módulo intuitivo para añadir existencias por talla y presentación.
+- **Recetas de Productos**: Funcionalidad avanzada para definir "ingredientes" o componentes. Ideal para productos que se venden en combos o que requieren ensamblaje, afectando el stock de múltiples ítems simultáneamente.
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
+### 3. 🛒 Punto de Venta (POS) Optimizado
 
-### Premium Partners
+Interfaz de alta velocidad para atención al cliente.
 
-- **[Vehikl](https://vehikl.com)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Redberry](https://redberry.international/laravel-development)**
-- **[Active Logic](https://activelogic.com)**
+- **Búsqueda Avanzada**: Motor de búsqueda que ignora acentos y caracteres especiales (Ej: "mocasín" se encuentra escribiendo "mocasin").
+- **Flujo de Pago**: Selección rápida de productos, cálculo automático de totales y gestión de métodos de pago (Efectivo, Tarjeta, etc.).
+- **Facturación Dual**:
+    - **Ticket**: Formato tradicional de 80mm para impresoras térmicas.
+    - **A4 (PDF)**: Formato detallado para facturación administrativa.
 
-## Contributing
+### 4. 👥 Gestión de Usuarios y Seguridad
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+Control total sobre quién accede a la información.
 
-## Code of Conduct
+- **Control de Acceso**: Middleware personalizado que verifica el rol y la sede activa en cada petición.
+- **Borrado Protegido**: Para eliminar un usuario, el administrador debe confirmar su propia contraseña, evitando eliminaciones accidentales o malintencionadas.
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+### 5. 📊 Inteligencia de Negocios
 
-## Security Vulnerabilities
+Módulo de reportes para toma de decisiones.
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+- **Ventas Diarias**: Resumen detallado de la operación del día actual.
+- **Reportes Mensuales**: Análisis de tendencias y volumen de ventas mes a mes.
+- **Filtros por Sede**: Los reportes se adaptan automáticamente a la sede activa para un análisis preciso.
 
-## License
+---
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+## 🛠️ Tecnologías y Arquitectura
+
+- **Core**: Laravel 11.x (PHP 8.2+)
+- **Base de Datos**: MySQL con uso extensivo de `Eloquent Global Scopes` para el manejo de `store_id`.
+- **Frontend**: Blade Templates + AdminLTE 3 + Vanilla JavaScript.
+- **Seguridad**: Autenticación nativa de Laravel extendida con persistencia de sesión de sede (`active_store_id`).
+- **Traits**: Uso del trait `BelongsToStore` en los modelos para automatizar el filtrado de datos por tienda.
+
+---
+
+## ⚙️ Instalación y Configuración
+
+1. **Clonar el repositorio**:
+    ```bash
+    git clone [url-del-repo]
+    cd AppLaravel
+    ```
+2. **Instalar dependencias**:
+    ```bash
+    composer install
+    npm install && npm run build
+    ```
+3. **Configurar el entorno**:
+   Copiar `.env.example` a `.env` y configurar la base de datos.
+4. **Migraciones y Datos Iniciales**:
+    ```bash
+    php artisan migrate
+    ```
+5. **Puesta en Marcha Rápida (Scripts Especiales)**:
+    - Crear Admin: `php seed_admin.php`
+    - Configurar Sede Principal: `php assign_default_store.php`
+    - Crear Segunda Sede: `php create_second_store.php`
+
+---
+
+## � Mejoras Implementadas Recientemente
+
+- ✅ **Optimización de Cambio de Tienda**: Corregido el error de re-autenticación que revertía al admin a la tienda 1.
+- ✅ **Búsqueda POS Accent-Insensitive**: Mejora crítica en la experiencia del cajero.
+- ✅ **Validación de Inventario**: Refuerzo en la lógica de `updateOrCreate` para stocks por talla.
+- ✅ **Estandarización de Divisa**: Unificación de la presentación visual a "S/." en toda la plataforma.
