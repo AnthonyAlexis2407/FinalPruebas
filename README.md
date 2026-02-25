@@ -1,6 +1,6 @@
-# 👟 AppLaravel: Sistema Integral de Gestión para Zapaterías
+# 🍿 AppLaravel: Sistema Integral de Gestión para Snacks y Comida
 
-AppLaravel es una solución completa diseñada para el sector retail (calzado y afines), con un enfoque en la escalabilidad multi-sede y el control granular de inventarios y ventas.
+AppLaravel es una solución completa diseñada para negocios de snacks, comida rápida y venta de productos en general, con un enfoque en la escalabilidad multi-sede y el control detallado de inventarios y ventas.
 
 ---
 
@@ -8,89 +8,75 @@ AppLaravel es una solución completa diseñada para el sector retail (calzado y 
 
 ### 1. 🏬 Arquitectura Multi-Sede (Aislamiento Total)
 
-Diseñado para negocios que operan en múltiples ubicaciones geográficas.
+Ideal para franquicias o negocios con múltiples locales físicos.
 
-- **Aislamiento por Tienda**: Cada sede tiene su propio ecosistema de datos. Un producto creado en la "Tienda A" no es visible en la "Tienda B" a menos que se configure explícitamente.
-- **Cambio de Contexto Dinámico**: Los administradores disponen de un selector de sede en el dashboard. Al cambiar de sede, el sistema utiliza re-autenticación de seguridad para asegurar que el usuario mantenga permisos válidos en el nuevo contexto.
-- **Identidad Visual**: Cada sede puede tener su propio color primario y branding configurado en la base de datos.
+- **Aislamiento por Local**: Cada sede gestiona su propia disponibilidad de productos y stock. Un snack disponible en el "Local A" no afectará el inventario del "Local B".
+- **Cambio de Contexto Dinámico**: Los administradores pueden supervisar diferentes locales desde el dashboard. Al cambiar de local, se utiliza re-autenticación de seguridad para garantizar la integridad de las operaciones.
+- **Identidad del Local**: Configuración personalizada de branding y colores para cada sede.
 - **Seguridad de Roles**:
-    - **Admin**: Acceso total, capacidad de saltar entre sedes y gestionar usuarios.
-    - **Cajero**: Bloqueado a una única sede asignada. No puede ver datos de otras tiendas.
+    - **Admin**: Supervisión total de todas las sedes y gestión de personal.
+    - **Cajero**: Vinculado exclusivamente a su local asignado para operaciones de venta.
 
-### 2. 📦 Inventario y Gestión de Productos
+### 2. 🍔 Inventario y Gestión de Productos
 
-Más allá de un simple registro de productos, el sistema maneja variantes complejas.
+Optimizado para el manejo de porciones, combos y presentaciones variadas.
 
-- **Categorías Inteligentes**: Los productos se organizan por categorías (Zapatillas, Sandalias, etc.).
-- **Tallas y Presentaciones**: El sistema permite definir números de calzado (tallas). Estas se filtran por categoría para que, al ingresar stock de "Zapatillas", solo se muestren tallas relevantes.
-- **Ingreso de Stock**: Módulo intuitivo para añadir existencias por talla y presentación.
-- **Recetas de Productos**: Funcionalidad avanzada para definir "ingredientes" o componentes. Ideal para productos que se venden en combos o que requieren ensamblaje, afectando el stock de múltiples ítems simultáneamente.
+- **Categorías Dinámicas**: Clasificación de productos (Bebidas, Snacks, Comida Caliente, Postres, etc.).
+- **Presentaciones y Porciones**: Permite definir diferentes formatos de venta (Ej: Pequeño, Mediano, Grande o por Peso/Volumen). El sistema filtra las presentaciones válidas según la categoría del producto.
+- **Abastecimiento de Stock**: Registro ágil de ingreso de insumos y productos terminados.
+- **Recetas de Productos (Combos)**: Funcionalidad clave para definir componentes de un plato o combo. Al vender un "Mega Combo", el sistema descuenta automáticamente del stock cada uno de sus componentes individuales.
 
-### 3. 🛒 Punto de Venta (POS) Optimizado
+### 3. � Punto de Venta (POS) de Alta Velocidad
 
-Interfaz de alta velocidad para atención al cliente.
+Diseñado para una atención rápida y eficiente.
 
-- **Búsqueda Avanzada**: Motor de búsqueda que ignora acentos y caracteres especiales (Ej: "mocasín" se encuentra escribiendo "mocasin").
-- **Flujo de Pago**: Selección rápida de productos, cálculo automático de totales y gestión de métodos de pago (Efectivo, Tarjeta, etc.).
-- **Facturación Dual**:
-    - **Ticket**: Formato tradicional de 80mm para impresoras térmicas.
-    - **A4 (PDF)**: Formato detallado para facturación administrativa.
+- **Búsqueda Inteligente**: Motor que localiza productos instantáneamente ignorando tildes o errores comunes (Ej: "hamburguesa" se encuentra escribiendo "hamburguesa").
+- **Flujo de Pago Flexible**: Procesamiento de ventas con múltiples métodos de pago (Efectivo, Yape/Plin, Tarjeta).
+- **Emisión de Comprobantes**:
+    - **Ticket**: Formato de boleta rápida para impresoras térmicas.
+    - **A4**: Formato detallado para pedidos grandes o coordinación logística.
 
-### 4. 👥 Gestión de Usuarios y Seguridad
+### 4. 👥 Seguridad y Colaboradores
 
-Control total sobre quién accede a la información.
+Control de acceso granular para proteger la operación.
 
-- **Control de Acceso**: Middleware personalizado que verifica el rol y la sede activa en cada petición.
-- **Borrado Protegido**: Para eliminar un usuario, el administrador debe confirmar su propia contraseña, evitando eliminaciones accidentales o malintencionadas.
+- **Protección de Datos**: Cada acción crítica está restringida por roles y sede.
+- **Confirmación de Seguridad**: Eliminación de registros sensibles mediante verificación de contraseña de administrador en tiempo real.
 
-### 5. 📊 Inteligencia de Negocios
+### 5. � Reportes y Analítica
 
-Módulo de reportes para toma de decisiones.
+Información crítica para el crecimiento del negocio.
 
-- **Ventas Diarias**: Resumen detallado de la operación del día actual.
-- **Reportes Mensuales**: Análisis de tendencias y volumen de ventas mes a mes.
-- **Filtros por Sede**: Los reportes se adaptan automáticamente a la sede activa para un análisis preciso.
+- **Cierre de Caja Diario**: Resumen de ingresos y movimientos del día.
+- **Reporte de Ventas Mensual**: Seguimiento de los productos más vendidos y rendimiento por local.
 
 ---
 
 ## 🛠️ Tecnologías y Arquitectura
 
 - **Core**: Laravel 11.x (PHP 8.2+)
-- **Base de Datos**: MySQL con uso extensivo de `Eloquent Global Scopes` para el manejo de `store_id`.
-- **Frontend**: Blade Templates + AdminLTE 3 + Vanilla JavaScript.
-- **Seguridad**: Autenticación nativa de Laravel extendida con persistencia de sesión de sede (`active_store_id`).
-- **Traits**: Uso del trait `BelongsToStore` en los modelos para automatizar el filtrado de datos por tienda.
+- **Base de Datos**: MySQL con filtrado automático mediante `Eloquent Scopes`.
+- **Frontend**: Blade + AdminLTE 3 + JS para formularios reactivos.
+- **Lógica Multi-Tenancy**: Trait `BelongsToStore` que automatiza la seguridad de datos por local.
 
 ---
 
 ## ⚙️ Instalación y Configuración
 
-1. **Clonar el repositorio**:
-    ```bash
-    git clone [url-del-repo]
-    cd AppLaravel
-    ```
-2. **Instalar dependencias**:
-    ```bash
-    composer install
-    npm install && npm run build
-    ```
-3. **Configurar el entorno**:
-   Copiar `.env.example` a `.env` y configurar la base de datos.
-4. **Migraciones y Datos Iniciales**:
-    ```bash
-    php artisan migrate
-    ```
-5. **Puesta en Marcha Rápida (Scripts Especiales)**:
-    - Crear Admin: `php seed_admin.php`
-    - Configurar Sede Principal: `php assign_default_store.php`
-    - Crear Segunda Sede: `php create_second_store.php`
+1. **Clonar el repositorio**.
+2. **Instalar dependencias**: `composer install` y `npm install`.
+3. **Configurar el entorno**: Renombrar `.env.example` a `.env` y configurar DB.
+4. **Migraciones**: `php artisan migrate`.
+5. **Carga Inicial**:
+    - Administrador: `php seed_admin.php`
+    - Configurar Local 1: `php assign_default_store.php`
+    - Añadir Segundo Local: `php create_second_store.php`
 
 ---
 
-## � Mejoras Implementadas Recientemente
+## 🚀 Mejoras Recientes
 
-- ✅ **Optimización de Cambio de Tienda**: Corregido el error de re-autenticación que revertía al admin a la tienda 1.
-- ✅ **Búsqueda POS Accent-Insensitive**: Mejora crítica en la experiencia del cajero.
-- ✅ **Validación de Inventario**: Refuerzo en la lógica de `updateOrCreate` para stocks por talla.
-- ✅ **Estandarización de Divisa**: Unificación de la presentación visual a "S/." en toda la plataforma.
+- ✅ **Persistencia de Local para Admin**: Corrección en el flujo de re-autenticación al rotar entre locales.
+- ✅ **Búsqueda Avanzada en POS**: Optimización del motor de búsqueda para catálogos amplios de comida y snacks.
+- ✅ **Gestión de Stock por Porción**: Mejoras en la precisión del inventario para presentaciones variables.
+- ✅ **Uniformidad Visual**: Estandarización de precios y formatos de moneda.
